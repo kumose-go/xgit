@@ -1,0 +1,125 @@
+version: "2"
+
+formatters:
+  enable:
+    - gci
+    - gofumpt
+  settings:
+    gofumpt:
+      extra-rules: true
+
+linters:
+  default: all
+  disable:
+    - cyclop # duplicate of gocyclo
+    - dupl
+    - exhaustive
+    - exhaustruct
+    - godot
+    - lll
+    - makezero
+    - nilnil
+    - nlreturn
+    - paralleltest
+    - prealloc
+    - rowserrcheck # not relevant (SQL)
+    - sqlclosecheck # not relevant (SQL)
+    - testpackage
+    - tparallel
+    - varnamelen
+    - wrapcheck
+    - wsl # deprecated
+
+  settings:
+    depguard:
+      rules:
+        main:
+          deny:
+            - pkg: github.com/instana/testify
+              desc: not allowed
+            - pkg: github.com/pkg/errors
+              desc: Should be replaced by standard lib errors package
+    forbidigo:
+      forbid:
+        - pattern: ^print(ln)?$
+        - pattern: ^spew\.Print(f|ln)?$
+        - pattern: ^spew\.Dump$
+    funlen:
+      lines: -1
+      statements: 50
+    goconst:
+      min-len: 5
+      min-occurrences: 3
+    gocritic:
+      disabled-checks:
+        - sloppyReassign
+        - rangeValCopy
+        - octalLiteral
+        - paramTypeCombine # already handle by gofumpt.extra-rules
+      #    settings:
+      #      hugeParam:
+      #        sizeThreshold: 220 # todo must be improved
+      enabled-tags:
+        - diagnostic
+        - style
+        - performance
+    gocyclo:
+      min-complexity: 15
+    godox:
+      keywords:
+        - FIXME
+    gosec:
+      excludes:
+        - G204
+    govet:
+      disable:
+        - fieldalignment
+      enable-all: true
+    misspell:
+      locale: US
+      ignore-rules:
+        - hardlinked
+        - behaviour
+    mnd:
+      ignored-functions:
+        - os.*
+    perfsprint:
+      err-error: true
+      errorf: true
+      sprintf1: true
+      strconcat: false
+    tagliatelle:
+      case:
+        rules:
+          json: snake
+
+  exclusions:
+    warn-unused: true
+    presets:
+      - comments
+    rules:
+      - path: (.+)_test.go
+        linters:
+          - funlen
+      - path: branch/branch.go
+        linter:
+        - revive
+        text: func name will be used as branch.BranchName by other packages
+      - path: notes/notes_custom.go
+        linter:
+          - revive
+        text: func name will be used as notes.NotesRef by other packages
+      - path: doc.go
+        linter:
+          - revive
+        text: don't use an underscore in package name
+      - path: internal/generator.go
+        text: 'G306:'
+      - path: types/types.go
+        linters:
+          - revive
+        text: avoid meaningless package names
+
+issues:
+  max-issues-per-linter: 0
+  max-same-issues: 0

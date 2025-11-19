@@ -1,0 +1,21 @@
+package notes
+
+import "github.com/kumose-go/xgit/types"
+
+// Object related to `copy` sub-command (`<from-object> <to-object>`).
+func Object(from, to string) types.Option {
+	return func(g *types.Cmd) {
+		g.AddOptions(from)
+
+		if to != "" {
+			g.AddOptions(to)
+		}
+	}
+}
+
+// NotesRef related to `merge` sub-command (`<notes-ref>`).
+func NotesRef(ref string) types.Option {
+	return func(g *types.Cmd) {
+		g.AddOptions(ref)
+	}
+}

@@ -1,0 +1,30 @@
+package commit
+
+import (
+	"fmt"
+
+	"github.com/kumose-go/xgit/types"
+)
+
+// HyphenHyphen add `--`.
+func HyphenHyphen(g *types.Cmd) {
+	g.AddOptions("--")
+}
+
+// Files [<file>...].
+func Files(files ...string) types.Option {
+	return func(g *types.Cmd) {
+		for _, file := range files {
+			g.AddOptions(file)
+		}
+	}
+}
+
+// Message Use the given <msg> as the commit message.
+// If multiple -m options are given, their values are concatenated as separate paragraphs.
+// -m <msg>, --message=<msg>
+func Message(msg string) types.Option {
+	return func(g *types.Cmd) {
+		g.AddOptions(fmt.Sprintf("--message=%s", msg))
+	}
+}
