@@ -6,7 +6,7 @@ import (
 	"path/filepath"
 	"testing"
 
-	"github.com/kumose-go/xgit/git"
+	"github.com/kumose-go/xgit"
 )
 
 func TestInit(t *testing.T) {
@@ -29,7 +29,7 @@ func TestInit(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	msg, err := git.Init(Directory("test"))
+	msg, err := xgit.Init(Directory("test"))
 	if err != nil {
 		t.Fatal(msg, err)
 	}

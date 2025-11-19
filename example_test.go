@@ -1,4 +1,4 @@
-package git_test
+package xgit_test
 
 import (
 	"context"
@@ -12,7 +12,7 @@ import (
 	"github.com/kumose-go/xgit/commit"
 	"github.com/kumose-go/xgit/config"
 	"github.com/kumose-go/xgit/fetch"
-	"github.com/kumose-go/xgit/git"
+	"github.com/kumose-go/xgit"
 	ginit "github.com/kumose-go/xgit/init"
 	"github.com/kumose-go/xgit/lsfiles"
 	"github.com/kumose-go/xgit/merge"
@@ -31,259 +31,259 @@ import (
 )
 
 func ExampleInit() {
-	out, _ := git.Init(ginit.Bare, ginit.Quiet, ginit.Directory("foobar"), git.CmdExecutor(cmdExecutorMock))
+	out, _ := xgit.Init(ginit.Bare, ginit.Quiet, ginit.Directory("foobar"), xgit.CmdExecutor(cmdExecutorMock))
 
 	fmt.Println(out)
 	// Output: git init --bare --quiet foobar
 }
 
 func ExampleInitWithContext() {
-	out, _ := git.InitWithContext(context.Background(), ginit.Bare, ginit.Quiet, ginit.Directory("foobar"), git.CmdExecutor(cmdExecutorMock))
+	out, _ := xgit.InitWithContext(context.Background(), ginit.Bare, ginit.Quiet, ginit.Directory("foobar"), xgit.CmdExecutor(cmdExecutorMock))
 
 	fmt.Println(out)
 	// Output: git init --bare --quiet foobar
 }
 
 func ExamplePush() {
-	out, _ := git.Push(push.All, push.FollowTags, push.ReceivePack("aaa"), git.CmdExecutor(cmdExecutorMock))
+	out, _ := xgit.Push(push.All, push.FollowTags, push.ReceivePack("aaa"), xgit.CmdExecutor(cmdExecutorMock))
 
 	fmt.Println(out)
 	// Output: git push --all --follow-tags --receive-pack=aaa
 }
 
 func ExamplePushWithContext() {
-	out, _ := git.PushWithContext(context.Background(), push.All, push.FollowTags, push.ReceivePack("aaa"), git.CmdExecutor(cmdExecutorMock))
+	out, _ := xgit.PushWithContext(context.Background(), push.All, push.FollowTags, push.ReceivePack("aaa"), xgit.CmdExecutor(cmdExecutorMock))
 
 	fmt.Println(out)
 	// Output: git push --all --follow-tags --receive-pack=aaa
 }
 
 func ExamplePull() {
-	out, _ := git.Pull(pull.All, pull.Force, pull.Repository("upstream"), pull.Refspec("master"), git.CmdExecutor(cmdExecutorMock))
+	out, _ := xgit.Pull(pull.All, pull.Force, pull.Repository("upstream"), pull.Refspec("master"), xgit.CmdExecutor(cmdExecutorMock))
 
 	fmt.Println(out)
 	// Output: git pull --all --force upstream master
 }
 
 func ExamplePullWithContext() {
-	out, _ := git.PullWithContext(context.Background(), pull.All, pull.Force, pull.Repository("upstream"), pull.Refspec("master"), git.CmdExecutor(cmdExecutorMock))
+	out, _ := xgit.PullWithContext(context.Background(), pull.All, pull.Force, pull.Repository("upstream"), pull.Refspec("master"), xgit.CmdExecutor(cmdExecutorMock))
 
 	fmt.Println(out)
 	// Output: git pull --all --force upstream master
 }
 
 func ExampleClone() {
-	out, _ := git.Clone(clone.Repository("git@github.com:ldez/go-git-cmd-wrapper.git"), git.CmdExecutor(cmdExecutorMock))
+	out, _ := xgit.Clone(clone.Repository("git@github.com:ldez/go-git-cmd-wrapper.git"), xgit.CmdExecutor(cmdExecutorMock))
 
 	fmt.Println(out)
 	// Output: git clone git@github.com:ldez/go-git-cmd-wrapper.git
 }
 
 func ExampleCloneWithContext() {
-	out, _ := git.CloneWithContext(context.Background(), clone.Repository("git@github.com:ldez/go-git-cmd-wrapper.git"), git.CmdExecutor(cmdExecutorMock))
+	out, _ := xgit.CloneWithContext(context.Background(), clone.Repository("git@github.com:ldez/go-git-cmd-wrapper.git"), xgit.CmdExecutor(cmdExecutorMock))
 
 	fmt.Println(out)
 	// Output: git clone git@github.com:ldez/go-git-cmd-wrapper.git
 }
 
 func ExampleRemote() {
-	out, _ := git.Remote(remote.Add("upstream", "git@github.com:johndoe/go-git-cmd-wrapper.git"), git.CmdExecutor(cmdExecutorMock))
+	out, _ := xgit.Remote(remote.Add("upstream", "git@github.com:johndoe/go-git-cmd-wrapper.git"), xgit.CmdExecutor(cmdExecutorMock))
 
 	fmt.Println(out)
 	// Output: git remote add upstream git@github.com:johndoe/go-git-cmd-wrapper.git
 }
 
 func ExampleRemoteWithContext() {
-	out, _ := git.RemoteWithContext(context.Background(), remote.Add("upstream", "git@github.com:johndoe/go-git-cmd-wrapper.git"), git.CmdExecutor(cmdExecutorMock))
+	out, _ := xgit.RemoteWithContext(context.Background(), remote.Add("upstream", "git@github.com:johndoe/go-git-cmd-wrapper.git"), xgit.CmdExecutor(cmdExecutorMock))
 
 	fmt.Println(out)
 	// Output: git remote add upstream git@github.com:johndoe/go-git-cmd-wrapper.git
 }
 
 func ExampleFetch() {
-	out, _ := git.Fetch(fetch.NoTags, fetch.Remote("upstream"), fetch.RefSpec("myBranchName"), git.CmdExecutor(cmdExecutorMock))
+	out, _ := xgit.Fetch(fetch.NoTags, fetch.Remote("upstream"), fetch.RefSpec("myBranchName"), xgit.CmdExecutor(cmdExecutorMock))
 
 	fmt.Println(out)
 	// Output: git fetch --no-tags upstream myBranchName
 }
 
 func ExampleFetchWithContext() {
-	out, _ := git.FetchWithContext(context.Background(), fetch.NoTags, fetch.Remote("upstream"), fetch.RefSpec("myBranchName"), git.CmdExecutor(cmdExecutorMock))
+	out, _ := xgit.FetchWithContext(context.Background(), fetch.NoTags, fetch.Remote("upstream"), fetch.RefSpec("myBranchName"), xgit.CmdExecutor(cmdExecutorMock))
 
 	fmt.Println(out)
 	// Output: git fetch --no-tags upstream myBranchName
 }
 
 func ExampleRebase() {
-	out, _ := git.Rebase(rebase.PreserveMerges, rebase.Branch(fmt.Sprintf("%s/%s", "upstream", "master")), git.CmdExecutor(cmdExecutorMock))
+	out, _ := xgit.Rebase(rebase.PreserveMerges, rebase.Branch(fmt.Sprintf("%s/%s", "upstream", "master")), xgit.CmdExecutor(cmdExecutorMock))
 
 	fmt.Println(out)
 	// Output: git rebase --preserve-merges upstream/master
 }
 
 func ExampleRebaseWithContext() {
-	out, _ := git.RebaseWithContext(context.Background(), rebase.PreserveMerges, rebase.Branch(fmt.Sprintf("%s/%s", "upstream", "master")), git.CmdExecutor(cmdExecutorMock))
+	out, _ := xgit.RebaseWithContext(context.Background(), rebase.PreserveMerges, rebase.Branch(fmt.Sprintf("%s/%s", "upstream", "master")), xgit.CmdExecutor(cmdExecutorMock))
 
 	fmt.Println(out)
 	// Output: git rebase --preserve-merges upstream/master
 }
 
 func ExampleCheckout() {
-	out, _ := git.Checkout(checkout.NewBranch("myBranchName"), git.CmdExecutor(cmdExecutorMock))
+	out, _ := xgit.Checkout(checkout.NewBranch("myBranchName"), xgit.CmdExecutor(cmdExecutorMock))
 
 	fmt.Println(out)
 	// Output: git checkout -b myBranchName
 }
 
 func ExampleCheckoutWithContext() {
-	out, _ := git.CheckoutWithContext(context.Background(), checkout.NewBranch("myBranchName"), git.CmdExecutor(cmdExecutorMock))
+	out, _ := xgit.CheckoutWithContext(context.Background(), checkout.NewBranch("myBranchName"), xgit.CmdExecutor(cmdExecutorMock))
 
 	fmt.Println(out)
 	// Output: git checkout -b myBranchName
 }
 
 func ExampleConfig() {
-	out, _ := git.Config(config.Entry("rebase.autoSquash", "true"), git.CmdExecutor(cmdExecutorMock))
+	out, _ := xgit.Config(config.Entry("rebase.autoSquash", "true"), xgit.CmdExecutor(cmdExecutorMock))
 
 	fmt.Println(out)
 	// Output: git config rebase.autoSquash true
 }
 
 func ExampleConfigWithContext() {
-	out, _ := git.ConfigWithContext(context.Background(), config.Entry("rebase.autoSquash", "true"), git.CmdExecutor(cmdExecutorMock))
+	out, _ := xgit.ConfigWithContext(context.Background(), config.Entry("rebase.autoSquash", "true"), xgit.CmdExecutor(cmdExecutorMock))
 
 	fmt.Println(out)
 	// Output: git config rebase.autoSquash true
 }
 
 func ExampleBranch() {
-	out, _ := git.Branch(branch.DeleteForce, branch.BranchName("myBranch"), git.CmdExecutor(cmdExecutorMock))
+	out, _ := xgit.Branch(branch.DeleteForce, branch.BranchName("myBranch"), xgit.CmdExecutor(cmdExecutorMock))
 
 	fmt.Println(out)
 	// Output: git branch -D myBranch
 }
 
 func ExampleBranchWithContext() {
-	out, _ := git.BranchWithContext(context.Background(), branch.DeleteForce, branch.BranchName("myBranch"), git.CmdExecutor(cmdExecutorMock))
+	out, _ := xgit.BranchWithContext(context.Background(), branch.DeleteForce, branch.BranchName("myBranch"), xgit.CmdExecutor(cmdExecutorMock))
 
 	fmt.Println(out)
 	// Output: git branch -D myBranch
 }
 
 func ExampleRevParse() {
-	out, _ := git.RevParse(revparse.AbbrevRef(""), revparse.Args("HEAD"), git.CmdExecutor(cmdExecutorMock))
+	out, _ := xgit.RevParse(revparse.AbbrevRef(""), revparse.Args("HEAD"), xgit.CmdExecutor(cmdExecutorMock))
 
 	fmt.Println(out)
 	// Output: git rev-parse --abbrev-ref HEAD
 }
 
 func ExampleRevParseWithContext() {
-	out, _ := git.RevParseWithContext(context.Background(), revparse.AbbrevRef(""), revparse.Args("HEAD"), git.CmdExecutor(cmdExecutorMock))
+	out, _ := xgit.RevParseWithContext(context.Background(), revparse.AbbrevRef(""), revparse.Args("HEAD"), xgit.CmdExecutor(cmdExecutorMock))
 
 	fmt.Println(out)
 	// Output: git rev-parse --abbrev-ref HEAD
 }
 
 func ExampleReset() {
-	out, _ := git.Reset(reset.Soft, reset.Commit("e41f083"), git.CmdExecutor(cmdExecutorMock))
+	out, _ := xgit.Reset(reset.Soft, reset.Commit("e41f083"), xgit.CmdExecutor(cmdExecutorMock))
 
 	fmt.Println(out)
 	// Output: git reset --soft e41f083
 }
 
 func ExampleResetWithContext() {
-	out, _ := git.ResetWithContext(context.Background(), reset.Soft, reset.Commit("e41f083"), git.CmdExecutor(cmdExecutorMock))
+	out, _ := xgit.ResetWithContext(context.Background(), reset.Soft, reset.Commit("e41f083"), xgit.CmdExecutor(cmdExecutorMock))
 
 	fmt.Println(out)
 	// Output: git reset --soft e41f083
 }
 
 func ExampleCommit() {
-	out, _ := git.Commit(commit.Amend, commit.Message("foo"), git.CmdExecutor(cmdExecutorMock))
+	out, _ := xgit.Commit(commit.Amend, commit.Message("foo"), xgit.CmdExecutor(cmdExecutorMock))
 
 	fmt.Println(out)
 	// Output: git commit --amend --message=foo
 }
 
 func ExampleCommitWithContext() {
-	out, _ := git.CommitWithContext(context.Background(), commit.Amend, commit.Message("foo"), git.CmdExecutor(cmdExecutorMock))
+	out, _ := xgit.CommitWithContext(context.Background(), commit.Amend, commit.Message("foo"), xgit.CmdExecutor(cmdExecutorMock))
 
 	fmt.Println(out)
 	// Output: git commit --amend --message=foo
 }
 
 func ExampleAdd() {
-	out, _ := git.Add(add.All, git.CmdExecutor(cmdExecutorMock))
+	out, _ := xgit.Add(add.All, xgit.CmdExecutor(cmdExecutorMock))
 
 	fmt.Println(out)
 	// Output: git add --all
 }
 
 func ExampleAddWithContext() {
-	out, _ := git.AddWithContext(context.Background(), add.All, git.CmdExecutor(cmdExecutorMock))
+	out, _ := xgit.AddWithContext(context.Background(), add.All, xgit.CmdExecutor(cmdExecutorMock))
 
 	fmt.Println(out)
 	// Output: git add --all
 }
 
 func ExampleMerge() {
-	out, _ := git.Merge(merge.Squash, merge.Commits("myBranch"), git.CmdExecutor(cmdExecutorMock))
+	out, _ := xgit.Merge(merge.Squash, merge.Commits("myBranch"), xgit.CmdExecutor(cmdExecutorMock))
 
 	fmt.Println(out)
 	// Output: git merge --squash myBranch
 }
 
 func ExampleMergeWithContext() {
-	out, _ := git.MergeWithContext(context.Background(), merge.Squash, merge.Commits("myBranch"), git.CmdExecutor(cmdExecutorMock))
+	out, _ := xgit.MergeWithContext(context.Background(), merge.Squash, merge.Commits("myBranch"), xgit.CmdExecutor(cmdExecutorMock))
 
 	fmt.Println(out)
 	// Output: git merge --squash myBranch
 }
 
 func ExampleWorktree() {
-	out, _ := git.Worktree(worktree.Add("v1.0", "origin/v1.0"), git.CmdExecutor(cmdExecutorMock))
+	out, _ := xgit.Worktree(worktree.Add("v1.0", "origin/v1.0"), xgit.CmdExecutor(cmdExecutorMock))
 
 	fmt.Println(out)
 	// Output: git worktree add v1.0 origin/v1.0
 }
 
 func ExampleWorktreeWithContext() {
-	out, _ := git.WorktreeWithContext(context.Background(), worktree.Add("v1.0", "origin/v1.0"), git.CmdExecutor(cmdExecutorMock))
+	out, _ := xgit.WorktreeWithContext(context.Background(), worktree.Add("v1.0", "origin/v1.0"), xgit.CmdExecutor(cmdExecutorMock))
 
 	fmt.Println(out)
 	// Output: git worktree add v1.0 origin/v1.0
 }
 
 func ExampleTag() {
-	out, _ := git.Tag(tag.List, git.CmdExecutor(cmdExecutorMock))
+	out, _ := xgit.Tag(tag.List, xgit.CmdExecutor(cmdExecutorMock))
 
 	fmt.Println(out)
 	// Output: git tag --list
 }
 
 func ExampleTagWithContext() {
-	out, _ := git.TagWithContext(context.Background(), tag.List, git.CmdExecutor(cmdExecutorMock))
+	out, _ := xgit.TagWithContext(context.Background(), tag.List, xgit.CmdExecutor(cmdExecutorMock))
 
 	fmt.Println(out)
 	// Output: git tag --list
 }
 
 func ExampleStatus() {
-	out, _ := git.Status(status.Short, status.Branch, git.CmdExecutor(cmdExecutorMock))
+	out, _ := xgit.Status(status.Short, status.Branch, xgit.CmdExecutor(cmdExecutorMock))
 
 	fmt.Println(out)
 	// Output: git status --short --branch
 }
 
 func ExampleStatusWithContext() {
-	out, _ := git.StatusWithContext(context.Background(), status.Short, status.Branch, git.CmdExecutor(cmdExecutorMock))
+	out, _ := xgit.StatusWithContext(context.Background(), status.Short, status.Branch, xgit.CmdExecutor(cmdExecutorMock))
 
 	fmt.Println(out)
 	// Output: git status --short --branch
 }
 
 func ExampleLsFiles() {
-	out, _ := git.LsFiles(lsfiles.Z, lsfiles.ExcludeStandard, lsfiles.Others, lsfiles.Cached, git.CmdExecutor(cmdExecutorMock))
+	out, _ := xgit.LsFiles(lsfiles.Z, lsfiles.ExcludeStandard, lsfiles.Others, lsfiles.Cached, xgit.CmdExecutor(cmdExecutorMock))
 
 	// Notes: to parse the output you can use `fmt.Println(strings.Split(out, "\x00"))`
 
@@ -292,7 +292,7 @@ func ExampleLsFiles() {
 }
 
 func ExampleLsFilesWithContext() {
-	out, _ := git.LsFilesWithContext(context.Background(), lsfiles.Z, lsfiles.ExcludeStandard, lsfiles.Others, lsfiles.Cached, git.CmdExecutor(cmdExecutorMock))
+	out, _ := xgit.LsFilesWithContext(context.Background(), lsfiles.Z, lsfiles.ExcludeStandard, lsfiles.Others, lsfiles.Cached, xgit.CmdExecutor(cmdExecutorMock))
 
 	// Notes: to parse the output you can use `fmt.Println(strings.Split(out, "\x00"))`
 
@@ -301,315 +301,315 @@ func ExampleLsFilesWithContext() {
 }
 
 func ExampleNotes_list() {
-	out, _ := git.Notes(notes.List(""), git.CmdExecutor(cmdExecutorMock))
+	out, _ := xgit.Notes(notes.List(""), xgit.CmdExecutor(cmdExecutorMock))
 
 	fmt.Println(out)
 	// Output: git notes list
 }
 
 func ExampleNotes_list_ref() {
-	out, _ := git.Notes(notes.Ref("c9718bfd46a7261d1120ac2e50ef6b298bb2394a"), notes.List(""), git.CmdExecutor(cmdExecutorMock))
+	out, _ := xgit.Notes(notes.Ref("c9718bfd46a7261d1120ac2e50ef6b298bb2394a"), notes.List(""), xgit.CmdExecutor(cmdExecutorMock))
 
 	fmt.Println(out)
 	// Output: git notes --ref c9718bfd46a7261d1120ac2e50ef6b298bb2394a list
 }
 
 func ExampleNotes_add() {
-	out, _ := git.Notes(notes.Add("", notes.Message("foo")), git.CmdExecutor(cmdExecutorMock))
+	out, _ := xgit.Notes(notes.Add("", notes.Message("foo")), xgit.CmdExecutor(cmdExecutorMock))
 
 	fmt.Println(out)
 	// Output: git notes add --message=foo
 }
 
 func ExampleNotes_copy() {
-	out, _ := git.Notes(notes.Copy(notes.Object("cb17b52c17fb36a807f135245725dee88603cc08", "c9718bfd46a7261d1120ac2e50ef6b298bb2394a")), git.CmdExecutor(cmdExecutorMock))
+	out, _ := xgit.Notes(notes.Copy(notes.Object("cb17b52c17fb36a807f135245725dee88603cc08", "c9718bfd46a7261d1120ac2e50ef6b298bb2394a")), xgit.CmdExecutor(cmdExecutorMock))
 
 	fmt.Println(out)
 	// Output: git notes copy cb17b52c17fb36a807f135245725dee88603cc08 c9718bfd46a7261d1120ac2e50ef6b298bb2394a
 }
 
 func ExampleNotes_append() {
-	out, _ := git.Notes(notes.Append("", notes.Message("foo")), git.CmdExecutor(cmdExecutorMock))
+	out, _ := xgit.Notes(notes.Append("", notes.Message("foo")), xgit.CmdExecutor(cmdExecutorMock))
 
 	fmt.Println(out)
 	// Output: git notes append --message=foo
 }
 
 func ExampleNotes_edit() {
-	out, _ := git.Notes(notes.Edit("", notes.Message("foo")), git.CmdExecutor(cmdExecutorMock))
+	out, _ := xgit.Notes(notes.Edit("", notes.Message("foo")), xgit.CmdExecutor(cmdExecutorMock))
 
 	fmt.Println(out)
 	// Output: git notes edit --message=foo
 }
 
 func ExampleNotes_show() {
-	out, _ := git.Notes(notes.Show(""), git.CmdExecutor(cmdExecutorMock))
+	out, _ := xgit.Notes(notes.Show(""), xgit.CmdExecutor(cmdExecutorMock))
 
 	fmt.Println(out)
 	// Output: git notes show
 }
 
 func ExampleNotes_merge() {
-	out, _ := git.Notes(notes.Merge(notes.Commit, notes.NotesRef("cb17b52c17fb36a807f135245725dee88603cc08")), git.CmdExecutor(cmdExecutorMock))
+	out, _ := xgit.Notes(notes.Merge(notes.Commit, notes.NotesRef("cb17b52c17fb36a807f135245725dee88603cc08")), xgit.CmdExecutor(cmdExecutorMock))
 
 	fmt.Println(out)
 	// Output: git notes merge --commit cb17b52c17fb36a807f135245725dee88603cc08
 }
 
 func ExampleNotes_remove() {
-	out, _ := git.Notes(notes.Remove("", notes.Stdin), git.CmdExecutor(cmdExecutorMock))
+	out, _ := xgit.Notes(notes.Remove("", notes.Stdin), xgit.CmdExecutor(cmdExecutorMock))
 
 	fmt.Println(out)
 	// Output: git notes remove --stdin
 }
 
 func ExampleNotes_prune() {
-	out, _ := git.Notes(notes.Prune(notes.Verbose), git.CmdExecutor(cmdExecutorMock))
+	out, _ := xgit.Notes(notes.Prune(notes.Verbose), xgit.CmdExecutor(cmdExecutorMock))
 
 	fmt.Println(out)
 	// Output: git notes prune --verbose
 }
 
 func ExampleNotes_getRef() {
-	out, _ := git.Notes(notes.GetRef(), git.CmdExecutor(cmdExecutorMock))
+	out, _ := xgit.Notes(notes.GetRef(), xgit.CmdExecutor(cmdExecutorMock))
 
 	fmt.Println(out)
 	// Output: git notes get-ref
 }
 
 func ExampleNotesWithContext_list() {
-	out, _ := git.NotesWithContext(context.Background(), notes.List(""), git.CmdExecutor(cmdExecutorMock))
+	out, _ := xgit.NotesWithContext(context.Background(), notes.List(""), xgit.CmdExecutor(cmdExecutorMock))
 
 	fmt.Println(out)
 	// Output: git notes list
 }
 
 func ExampleNotesWithContext_list_ref() {
-	out, _ := git.Notes(notes.Ref("c9718bfd46a7261d1120ac2e50ef6b298bb2394a"), notes.List(""), git.CmdExecutor(cmdExecutorMock))
+	out, _ := xgit.Notes(notes.Ref("c9718bfd46a7261d1120ac2e50ef6b298bb2394a"), notes.List(""), xgit.CmdExecutor(cmdExecutorMock))
 
 	fmt.Println(out)
 	// Output: git notes --ref c9718bfd46a7261d1120ac2e50ef6b298bb2394a list
 }
 
 func ExampleNotesWithContext_add() {
-	out, _ := git.NotesWithContext(context.Background(), notes.Add("", notes.Message("foo")), git.CmdExecutor(cmdExecutorMock))
+	out, _ := xgit.NotesWithContext(context.Background(), notes.Add("", notes.Message("foo")), xgit.CmdExecutor(cmdExecutorMock))
 
 	fmt.Println(out)
 	// Output: git notes add --message=foo
 }
 
 func ExampleNotesWithContext_copy() {
-	out, _ := git.NotesWithContext(context.Background(), notes.Copy(notes.Stdin), git.CmdExecutor(cmdExecutorMock))
+	out, _ := xgit.NotesWithContext(context.Background(), notes.Copy(notes.Stdin), xgit.CmdExecutor(cmdExecutorMock))
 
 	fmt.Println(out)
 	// Output: git notes copy --stdin
 }
 
 func ExampleNotesWithContext_append() {
-	out, _ := git.NotesWithContext(context.Background(), notes.Append("", notes.Message("foo")), git.CmdExecutor(cmdExecutorMock))
+	out, _ := xgit.NotesWithContext(context.Background(), notes.Append("", notes.Message("foo")), xgit.CmdExecutor(cmdExecutorMock))
 
 	fmt.Println(out)
 	// Output: git notes append --message=foo
 }
 
 func ExampleNotesWithContext_edit() {
-	out, _ := git.NotesWithContext(context.Background(), notes.Edit("", notes.Message("foo")), git.CmdExecutor(cmdExecutorMock))
+	out, _ := xgit.NotesWithContext(context.Background(), notes.Edit("", notes.Message("foo")), xgit.CmdExecutor(cmdExecutorMock))
 
 	fmt.Println(out)
 	// Output: git notes edit --message=foo
 }
 
 func ExampleNotesWithContext_show() {
-	out, _ := git.NotesWithContext(context.Background(), notes.Show(""), git.CmdExecutor(cmdExecutorMock))
+	out, _ := xgit.NotesWithContext(context.Background(), notes.Show(""), xgit.CmdExecutor(cmdExecutorMock))
 
 	fmt.Println(out)
 	// Output: git notes show
 }
 
 func ExampleNotesWithContext_merge() {
-	out, _ := git.NotesWithContext(context.Background(), notes.Merge(notes.Commit), git.CmdExecutor(cmdExecutorMock))
+	out, _ := xgit.NotesWithContext(context.Background(), notes.Merge(notes.Commit), xgit.CmdExecutor(cmdExecutorMock))
 
 	fmt.Println(out)
 	// Output: git notes merge --commit
 }
 
 func ExampleNotesWithContext_remove() {
-	out, _ := git.NotesWithContext(context.Background(), notes.Remove("", notes.Stdin), git.CmdExecutor(cmdExecutorMock))
+	out, _ := xgit.NotesWithContext(context.Background(), notes.Remove("", notes.Stdin), xgit.CmdExecutor(cmdExecutorMock))
 
 	fmt.Println(out)
 	// Output: git notes remove --stdin
 }
 
 func ExampleNotesWithContext_prune() {
-	out, _ := git.NotesWithContext(context.Background(), notes.Prune(notes.Verbose), git.CmdExecutor(cmdExecutorMock))
+	out, _ := xgit.NotesWithContext(context.Background(), notes.Prune(notes.Verbose), xgit.CmdExecutor(cmdExecutorMock))
 
 	fmt.Println(out)
 	// Output: git notes prune --verbose
 }
 
 func ExampleNotesWithContext_getRef() {
-	out, _ := git.NotesWithContext(context.Background(), notes.GetRef(), git.CmdExecutor(cmdExecutorMock))
+	out, _ := xgit.NotesWithContext(context.Background(), notes.GetRef(), xgit.CmdExecutor(cmdExecutorMock))
 
 	fmt.Println(out)
 	// Output: git notes get-ref
 }
 
 func ExampleStash_push() {
-	out, _ := git.Stash(stash.Push("foo", stash.All), git.CmdExecutor(cmdExecutorMock))
+	out, _ := xgit.Stash(stash.Push("foo", stash.All), xgit.CmdExecutor(cmdExecutorMock))
 
 	fmt.Println(out)
 	// Output: git stash push --all foo
 }
 
 func ExampleStash_save() {
-	out, _ := git.Stash(stash.Save("foo", stash.Patch), git.CmdExecutor(cmdExecutorMock))
+	out, _ := xgit.Stash(stash.Save("foo", stash.Patch), xgit.CmdExecutor(cmdExecutorMock))
 
 	fmt.Println(out)
 	// Output: git stash save --patch foo
 }
 
 func ExampleStash_list() {
-	out, _ := git.Stash(stash.List(), git.CmdExecutor(cmdExecutorMock))
+	out, _ := xgit.Stash(stash.List(), xgit.CmdExecutor(cmdExecutorMock))
 
 	fmt.Println(out)
 	// Output: git stash list
 }
 
 func ExampleStash_show() {
-	out, _ := git.Stash(stash.Show("stash@{1}", stash.IncludeUntracked), git.CmdExecutor(cmdExecutorMock))
+	out, _ := xgit.Stash(stash.Show("stash@{1}", stash.IncludeUntracked), xgit.CmdExecutor(cmdExecutorMock))
 
 	fmt.Println(out)
 	// Output: git stash show --include-untracked stash@{1}
 }
 
 func ExampleStash_pop() {
-	out, _ := git.Stash(stash.Pop("stash@{1}", stash.Quiet), git.CmdExecutor(cmdExecutorMock))
+	out, _ := xgit.Stash(stash.Pop("stash@{1}", stash.Quiet), xgit.CmdExecutor(cmdExecutorMock))
 
 	fmt.Println(out)
 	// Output: git stash pop --quiet stash@{1}
 }
 
 func ExampleStash_apply() {
-	out, _ := git.Stash(stash.Apply("stash@{1}", stash.Quiet), git.CmdExecutor(cmdExecutorMock))
+	out, _ := xgit.Stash(stash.Apply("stash@{1}", stash.Quiet), xgit.CmdExecutor(cmdExecutorMock))
 
 	fmt.Println(out)
 	// Output: git stash apply --quiet stash@{1}
 }
 
 func ExampleStash_branch() {
-	out, _ := git.Stash(stash.Branch("foo", "stash@{1}"), git.CmdExecutor(cmdExecutorMock))
+	out, _ := xgit.Stash(stash.Branch("foo", "stash@{1}"), xgit.CmdExecutor(cmdExecutorMock))
 
 	fmt.Println(out)
 	// Output: git stash branch foo stash@{1}
 }
 
 func ExampleStash_clear() {
-	out, _ := git.Stash(stash.Clear(), git.CmdExecutor(cmdExecutorMock))
+	out, _ := xgit.Stash(stash.Clear(), xgit.CmdExecutor(cmdExecutorMock))
 
 	fmt.Println(out)
 	// Output: git stash clear
 }
 
 func ExampleStash_drop() {
-	out, _ := git.Stash(stash.Drop("stash@{1}", stash.Quiet), git.CmdExecutor(cmdExecutorMock))
+	out, _ := xgit.Stash(stash.Drop("stash@{1}", stash.Quiet), xgit.CmdExecutor(cmdExecutorMock))
 
 	fmt.Println(out)
 	// Output: git stash drop --quiet stash@{1}
 }
 
 func ExampleStash_create() {
-	out, _ := git.Stash(stash.Create(), git.CmdExecutor(cmdExecutorMock))
+	out, _ := xgit.Stash(stash.Create(), xgit.CmdExecutor(cmdExecutorMock))
 
 	fmt.Println(out)
 	// Output: git stash create
 }
 
 func ExampleStash_store() {
-	out, _ := git.Stash(stash.Store(), git.CmdExecutor(cmdExecutorMock))
+	out, _ := xgit.Stash(stash.Store(), xgit.CmdExecutor(cmdExecutorMock))
 
 	fmt.Println(out)
 	// Output: git stash store
 }
 
 func ExampleStashWithContext_push() {
-	out, _ := git.StashWithContext(context.Background(), stash.Push("foo", stash.All), git.CmdExecutor(cmdExecutorMock))
+	out, _ := xgit.StashWithContext(context.Background(), stash.Push("foo", stash.All), xgit.CmdExecutor(cmdExecutorMock))
 
 	fmt.Println(out)
 	// Output: git stash push --all foo
 }
 
 func ExampleStashWithContext_save() {
-	out, _ := git.StashWithContext(context.Background(), stash.Save("foo", stash.Patch), git.CmdExecutor(cmdExecutorMock))
+	out, _ := xgit.StashWithContext(context.Background(), stash.Save("foo", stash.Patch), xgit.CmdExecutor(cmdExecutorMock))
 
 	fmt.Println(out)
 	// Output: git stash save --patch foo
 }
 
 func ExampleStashWithContext_list() {
-	out, _ := git.StashWithContext(context.Background(), stash.List(), git.CmdExecutor(cmdExecutorMock))
+	out, _ := xgit.StashWithContext(context.Background(), stash.List(), xgit.CmdExecutor(cmdExecutorMock))
 
 	fmt.Println(out)
 	// Output: git stash list
 }
 
 func ExampleStashWithContext_show() {
-	out, _ := git.StashWithContext(context.Background(), stash.Show("stash@{1}", stash.IncludeUntracked), git.CmdExecutor(cmdExecutorMock))
+	out, _ := xgit.StashWithContext(context.Background(), stash.Show("stash@{1}", stash.IncludeUntracked), xgit.CmdExecutor(cmdExecutorMock))
 
 	fmt.Println(out)
 	// Output: git stash show --include-untracked stash@{1}
 }
 
 func ExampleStashWithContext_pop() {
-	out, _ := git.StashWithContext(context.Background(), stash.Pop("stash@{1}", stash.Quiet), git.CmdExecutor(cmdExecutorMock))
+	out, _ := xgit.StashWithContext(context.Background(), stash.Pop("stash@{1}", stash.Quiet), xgit.CmdExecutor(cmdExecutorMock))
 
 	fmt.Println(out)
 	// Output: git stash pop --quiet stash@{1}
 }
 
 func ExampleStashWithContext_apply() {
-	out, _ := git.StashWithContext(context.Background(), stash.Apply("stash@{1}", stash.Quiet), git.CmdExecutor(cmdExecutorMock))
+	out, _ := xgit.StashWithContext(context.Background(), stash.Apply("stash@{1}", stash.Quiet), xgit.CmdExecutor(cmdExecutorMock))
 
 	fmt.Println(out)
 	// Output: git stash apply --quiet stash@{1}
 }
 
 func ExampleStashWithContext_branch() {
-	out, _ := git.StashWithContext(context.Background(), stash.Branch("foo", "stash@{1}"), git.CmdExecutor(cmdExecutorMock))
+	out, _ := xgit.StashWithContext(context.Background(), stash.Branch("foo", "stash@{1}"), xgit.CmdExecutor(cmdExecutorMock))
 
 	fmt.Println(out)
 	// Output: git stash branch foo stash@{1}
 }
 
 func ExampleStashWithContext_clear() {
-	out, _ := git.StashWithContext(context.Background(), stash.Clear(), git.CmdExecutor(cmdExecutorMock))
+	out, _ := xgit.StashWithContext(context.Background(), stash.Clear(), xgit.CmdExecutor(cmdExecutorMock))
 
 	fmt.Println(out)
 	// Output: git stash clear
 }
 
 func ExampleStashWithContext_drop() {
-	out, _ := git.StashWithContext(context.Background(), stash.Drop("stash@{1}", stash.Quiet), git.CmdExecutor(cmdExecutorMock))
+	out, _ := xgit.StashWithContext(context.Background(), stash.Drop("stash@{1}", stash.Quiet), xgit.CmdExecutor(cmdExecutorMock))
 
 	fmt.Println(out)
 	// Output: git stash drop --quiet stash@{1}
 }
 
 func ExampleStashWithContext_create() {
-	out, _ := git.StashWithContext(context.Background(), stash.Create(), git.CmdExecutor(cmdExecutorMock))
+	out, _ := xgit.StashWithContext(context.Background(), stash.Create(), xgit.CmdExecutor(cmdExecutorMock))
 
 	fmt.Println(out)
 	// Output: git stash create
 }
 
 func ExampleStashWithContext_store() {
-	out, _ := git.StashWithContext(context.Background(), stash.Store(), git.CmdExecutor(cmdExecutorMock))
+	out, _ := xgit.StashWithContext(context.Background(), stash.Store(), xgit.CmdExecutor(cmdExecutorMock))
 
 	fmt.Println(out)
 	// Output: git stash store
 }
 
 func ExampleRaw() {
-	out, _ := git.Raw("stash", git.CmdExecutor(cmdExecutorMock), func(g *types.Cmd) {
+	out, _ := xgit.Raw("stash", xgit.CmdExecutor(cmdExecutorMock), func(g *types.Cmd) {
 		g.AddOptions("list")
 		g.AddOptions("--pretty=format:'%Cblue%gd%Creset%Cred:%Creset %C(yellow)%s%Creset'")
 	})
@@ -619,7 +619,7 @@ func ExampleRaw() {
 }
 
 func ExampleRawWithContext() {
-	out, _ := git.RawWithContext(context.Background(), "stash", git.CmdExecutor(cmdExecutorMock), func(g *types.Cmd) {
+	out, _ := xgit.RawWithContext(context.Background(), "stash", xgit.CmdExecutor(cmdExecutorMock), func(g *types.Cmd) {
 		g.AddOptions("list")
 		g.AddOptions("--pretty=format:'%Cblue%gd%Creset%Cred:%Creset %C(yellow)%s%Creset'")
 	})
@@ -629,7 +629,7 @@ func ExampleRawWithContext() {
 }
 
 func ExampleRawWithContext_baseOptions() {
-	out, _ := git.RawWithContext(
+	out, _ := xgit.RawWithContext(
 		context.Background(),
 		"stash",
 		func(g *types.Cmd) {
@@ -640,7 +640,7 @@ func ExampleRawWithContext_baseOptions() {
 			g.AddBaseOptions("-C")
 			g.AddBaseOptions("<your_path>")
 		},
-		git.CmdExecutor(cmdExecutorMock),
+		xgit.CmdExecutor(cmdExecutorMock),
 	)
 
 	fmt.Println(out)
@@ -649,12 +649,12 @@ func ExampleRawWithContext_baseOptions() {
 
 func ExampleCond() {
 	param := false
-	out, _ := git.Push(push.All, git.Cond(param, push.DryRun), push.FollowTags, push.ReceivePack("aaa"), git.CmdExecutor(cmdExecutorMock))
+	out, _ := xgit.Push(push.All, xgit.Cond(param, push.DryRun), push.FollowTags, push.ReceivePack("aaa"), xgit.CmdExecutor(cmdExecutorMock))
 
 	fmt.Print(out)
 
 	param = true
-	out, _ = git.Push(push.All, git.Cond(param, push.DryRun), push.FollowTags, push.ReceivePack("aaa"), git.CmdExecutor(cmdExecutorMock))
+	out, _ = xgit.Push(push.All, xgit.Cond(param, push.DryRun), push.FollowTags, push.ReceivePack("aaa"), xgit.CmdExecutor(cmdExecutorMock))
 
 	fmt.Print(out)
 

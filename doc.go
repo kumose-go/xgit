@@ -1,9 +1,9 @@
 /*
-Package go_git_cmd_wrapper A simple wrapper around `git` command.
+Package xgit A simple wrapper around `git` command.
 
 	import (
 		// ...
-		"github.com/kumose-go/xgit/git"
+		"github.com/kumose-go/xgit"
 		// ...
 		"github.com/kumose-go/xgit/clone"
 		"github.com/kumose-go/xgit/config"
@@ -12,16 +12,16 @@ Package go_git_cmd_wrapper A simple wrapper around `git` command.
 	)
 
 	// clone
-	output, err := git.Clone(clone.Repository("https://github.com/ldez/gcg"))
+	output, err := xgit.Clone(clone.Repository("https://github.com/ldez/gcg"))
 	// with debug option
-	output, err := git.Clone(clone.Repository("https://github.com/ldez/gcg"), git.Debug)
-	output, err := git.Clone(clone.Repository("https://github.com/ldez/gcg"), git.Debugger(true))
+	output, err := xgit.Clone(clone.Repository("https://github.com/ldez/gcg"), xgit.Debug)
+	output, err := xgit.Clone(clone.Repository("https://github.com/ldez/gcg"), xgit.Debugger(true))
 
 	// fetch
-	output, err = git.Fetch(fetch.NoTags, fetch.Remote("upstream"))
-	output, err = git.Fetch(fetch.NoTags, fetch.Remote("upstream"), fetch.RefSpec("master"))
+	output, err = xgit.Fetch(fetch.NoTags, fetch.Remote("upstream"))
+	output, err = xgit.Fetch(fetch.NoTags, fetch.Remote("upstream"), fetch.RefSpec("master"))
 
 	// add a remote
-	output, err = git.Remote(remote.Add, remote.Name("upstream"), remote.URL("https://github.com/ldez/gcg"))
+	output, err = xgit.Remote(remote.Add, remote.Name("upstream"), remote.URL("https://github.com/ldez/gcg"))
 */
-package go_git_cmd_wrapper
+package xgit
