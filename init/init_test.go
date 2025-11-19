@@ -11,7 +11,7 @@ import (
 
 func TestInit(t *testing.T) {
 	//nolint:usetesting // Don't use `t.TempDir()` because of a bug with Windows on the CI
-	dir, err := os.MkdirTemp("", "go-git-cmd-wrapper")
+	dir, err := os.MkdirTemp("", "xgit")
 	if err != nil {
 		t.Fatal(err)
 	}
